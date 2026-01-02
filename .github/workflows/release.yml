@@ -45,7 +45,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          cat ~/bunfig.toml
+          cat bunfig.toml
 
           bun publish
           echo "npm 배포가 완료되었습니다."
