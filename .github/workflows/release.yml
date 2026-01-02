@@ -45,7 +45,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          cat ~/bunfig.toml
 
           bun publish
           echo "npm 배포가 완료되었습니다."
