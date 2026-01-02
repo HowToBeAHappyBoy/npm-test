@@ -15,15 +15,9 @@ jobs:
           ref: ${{ github.event.release.tag_name }}
 
       - name: Setup Bun
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         uses: oven-sh/setup-bun@v2
-        with:
-          registries: https://registry.npmjs.org/|$NPM_TOKEN
 
       - name: Install dependencies
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: bun install --frozen-lockfile
 
       - name: Verify tag matches package.json
@@ -49,7 +43,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          cat bunfig.toml
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
           bun publish
           echo "npm 배포가 완료되었습니다."
