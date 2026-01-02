@@ -17,9 +17,11 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          registry-url: "https://registry.npmjs.org"
+          registry-url: "https://registry.npmjs.org/|$NPM_TOKEN"
 
       - name: Install dependencies
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: bun install --frozen-lockfile
 
       - name: Verify tag matches package.json
@@ -43,7 +45,7 @@ jobs:
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cat bunfig.toml
 
